@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './client/index.js',
@@ -20,20 +21,20 @@ module.exports = {
         }
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
-        ],
+        test : /\.css$/, 
+        exclude: /node_modules/,
+        use:['style-loader', 'css-loader']
       }
     ]
   },
   devServer: {
-    publicPath: '/build/',
-    proxy: {}
-  }
+    proxy: {
+      '/jobs': 'http://localhost:3000',
+    }
+  },
+  plugins : [
+    new HtmlWebpackPlugin ({
+        template : 'client/index.html'
+    })
+  ]
 };

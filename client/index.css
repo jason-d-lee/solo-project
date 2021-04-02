@@ -1,0 +1,5 @@
+.card{
+  min-width: 300px;
+  display: inline-block;
+  border-style: solid;
+}
